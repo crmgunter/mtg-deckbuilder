@@ -9,7 +9,7 @@ const userController = {
         .catch(err => console.log(err))
     },
     show: (req, res) => {
-        User.findById(req.params.userId)
+        User.findById(req.params.userId).populate('decks')
         .then(user => {
             res.send(user)
         }).catch(err => console.log(err))
