@@ -24,6 +24,13 @@ const userController = {
         .then(user => {
             res.send(user)
         }).catch(err => console.log(err))
+    },
+    delete: (req, res) => {
+        User.findByIdAndDelete(req.params.userId)
+        .then(() => {
+            res.send(200)
+            res.redirect('/api/users')
+        })
     }
 }
 
