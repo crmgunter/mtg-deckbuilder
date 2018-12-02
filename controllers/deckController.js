@@ -9,7 +9,7 @@ const deckController = {
         })
     },
     show: (req, res) => {
-        Deck.findById(req.params.deckId)
+        Deck.findById(req.params.deckId).populate('cards')
         .then(deck => res.send(deck))
     },
     create: (req, res) => {

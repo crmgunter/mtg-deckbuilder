@@ -4,6 +4,7 @@ import Home from "./components/Home"
 import Nav from "./components/Nav"
 import AllUsers from './components/users/AllUsers'
 import SingleUser from './components/users/SingleUser'
+import SingleDeck from './components/decks/SingleDeck'
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/users" component={AllUsers}/>
               <Route exact path="/users/:userId" component={SingleUser}/>
+              <Route exact path="/users/:userId/decks/:deckId" component={SingleDeck}/>
             </Switch>
           </div>
         </Router>
