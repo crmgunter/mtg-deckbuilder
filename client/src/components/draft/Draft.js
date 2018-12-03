@@ -5,7 +5,7 @@ import Booster from "./Booster"
 class Draft extends Component {
   state = {
     sets: [],
-    boosters: []
+    numberOfSets: 0
   }
 
   componentDidMount() {
@@ -56,6 +56,7 @@ class Draft extends Component {
             boosters.push(res.data.cards)
             this.setState({ boosters })
         })
+        this.setState({ numberOfSets: this.state.numberOfSets += 1})
     }
   }
 
@@ -78,7 +79,7 @@ class Draft extends Component {
             <button>Go</button>
           </div>
         </form>
-        {this.state.booster ? <Booster booster={this.state.booster} /> : null}
+        {this.state.numberOfSets === 8 ? <Booster boosters={this.state.boosters} /> : null}
       </div>
     )
   }
