@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import axios from "axios"
-import Booster from './Booster'
+import Booster from "./Booster"
 
 class Draft extends Component {
   state = {
-    sets: []
+    sets: [],
+    boosters: []
   }
 
   componentDidMount() {
@@ -36,13 +37,26 @@ class Draft extends Component {
     this.setState({ setChosen })
   }
 
-  handleSubmit = (event) => {
-      event.preventDefault()
-    axios
-      .get(`https://api.magicthegathering.io/v1/sets/${this.state.setChosen}/booster`)
-      .then(res => {
-        this.setState({ booster: res.data.cards })
-      })
+  handleSubmit = event => {
+    event.preventDefault()
+    this.generateEightPacks()
+  }
+
+  generateEightPacks = () => {
+      const boosters = []
+    for (let i = 0; i < 8; i++) {
+      console.log("hey")
+      axios
+        .get(
+          `https://api.magicthegathering.io/v1/sets/${
+            this.state.setChosen
+          }/booster`
+        )
+        .then(res => {
+            boosters.push(res.data.cards)
+            this.setState({ boosters })
+        })
+    }
   }
 
   render() {
@@ -64,8 +78,7 @@ class Draft extends Component {
             <button>Go</button>
           </div>
         </form>
-
-        {this.state.booster ? <Booster booster={this.state.booster}/> : null}
+        {this.state.booster ? <Booster booster={this.state.booster} /> : null}
       </div>
     )
   }
