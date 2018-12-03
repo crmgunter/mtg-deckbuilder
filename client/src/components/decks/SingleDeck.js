@@ -1,13 +1,16 @@
 import React, { Component } from "react"
 import axios from "axios"
 import AddCardForm from "./AddCardForm"
+import { Link } from "react-router-dom"
+import EditCardForm from "./EditCardForm"
 
 class SingleDeck extends Component {
   state = {
     deck: {
       cards: [{}]
     },
-    formToggle: false
+    formToggle: false,
+    editToggle: false
   }
 
   componentDidMount() {
@@ -30,6 +33,20 @@ class SingleDeck extends Component {
     this.setState({ formToggle: !this.state.formToggle })
   }
 
+  deleteDeck = cardId => {
+    console.log("deleted successfully")
+    axios.delete(
+      `/api/users/${this.props.userId}/decks/${
+        this.props.deckId
+      }/cards/${cardId}`
+    )
+    this.getDeck()
+  }
+
+  toggleEdit = () => {
+    this.setState({ editToggle: !this.state.editToggle })
+  }
+
   render() {
     return (
       <div>
@@ -47,9 +64,32 @@ class SingleDeck extends Component {
         <div>{this.state.deck.name}</div>
         {this.state.deck.cards.map((card, index) => (
           <div key={index}>
-            <div>{card.name}</div>
-            <img src={card.image} alt={card.name} />
-            <div>{card.description}</div>
+            {this.state.editToggle ? (
+              <EditCardForm
+                history={this.props.history}
+                toggleEdit={this.toggleEdit}
+                card={card}
+                getDeck={this.getDeck}
+                userId={this.props.match.params.userId}
+                deckId={this.props.match.params.deckId}
+              />
+            ) : (
+              <div>
+                <Link
+                  to={`/users/${this.props.match.params.userId}/decks/${
+                    this.state.deck._id
+                  }/cards/${card._id}`}
+                >
+                  <div>{card.name}</div>
+                </Link>
+                <img src={card.image} alt={card.name} />
+                <div>{card.description}</div>
+                <button onClick={this.toggleEdit}>Edit card</button>
+              </div>
+            )}
+            <button onClick={() => this.deleteDeck(card._id)}>
+              delete card
+            </button>
           </div>
         ))}
       </div>

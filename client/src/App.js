@@ -5,6 +5,7 @@ import Nav from "./components/Nav"
 import AllUsers from './components/users/AllUsers'
 import SingleUser from './components/users/SingleUser'
 import SingleDeck from './components/decks/SingleDeck'
+import SingleCard from './components/cards/SingleCard'
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
               <Route exact path="/users" component={AllUsers}/>
               <Route exact path="/users/:userId" component={SingleUser}/>
               <Route exact path="/users/:userId/decks/:deckId" component={SingleDeck}/>
+              <Route exact path="/users/:userId/decks/:deckId/cards/:cardId" component={SingleCard}/>
             </Switch>
           </div>
         </Router>
