@@ -4,8 +4,7 @@ import Booster from "./Booster"
 
 class Draft extends Component {
   state = {
-    sets: [],
-    numberOfSets: 0
+    sets: []
   }
 
   componentDidMount() {
@@ -39,25 +38,23 @@ class Draft extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.generateEightPacks()
+    this.getBooster()
   }
 
-  generateEightPacks = () => {
-      const boosters = []
-    for (let i = 0; i < 8; i++) {
-      console.log("hey")
-      axios
-        .get(
-          `https://api.magicthegathering.io/v1/sets/${
-            this.state.setChosen
-          }/booster`
-        )
-        .then(res => {
-            boosters.push(res.data.cards)
-            this.setState({ boosters })
-        })
-        this.setState({ numberOfSets: this.state.numberOfSets += 1})
-    }
+  getBooster = () => {
+    axios
+    .get(
+      `https://api.magicthegathering.io/v1/sets/${
+        this.state.setChosen
+      }/booster`
+    )
+    .then(res => {
+        this.setState({ boosters: res.data.cards })
+    })
+  }
+
+  chooseCard = () => {
+      
   }
 
   render() {
@@ -79,7 +76,7 @@ class Draft extends Component {
             <button>Go</button>
           </div>
         </form>
-        {this.state.numberOfSets === 8 ? <Booster boosters={this.state.boosters} /> : null}
+        {this.state.boosters? <Booster boosters={this.state.boosters} /> : null}
       </div>
     )
   }
