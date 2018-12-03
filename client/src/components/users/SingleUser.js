@@ -34,6 +34,7 @@ class SingleUser extends Component {
             </Link>
           </div>
         ))}
+        <Link to={`/users/${this.state.user._id}/draft`}>Play a draft</Link>
       </div>
     )
   }

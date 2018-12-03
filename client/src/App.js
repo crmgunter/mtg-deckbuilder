@@ -6,6 +6,7 @@ import AllUsers from './components/users/AllUsers'
 import SingleUser from './components/users/SingleUser'
 import SingleDeck from './components/decks/SingleDeck'
 import SingleCard from './components/cards/SingleCard'
+import Draft from './components/draft/Draft'
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
               <Route exact path="/users/:userId" component={SingleUser}/>
               <Route exact path="/users/:userId/decks/:deckId" component={SingleDeck}/>
               <Route exact path="/users/:userId/decks/:deckId/cards/:cardId" component={SingleCard}/>
+              <Route exact path="/users/:userId/draft" component={Draft}/>
             </Switch>
           </div>
         </Router>
