@@ -35,6 +35,7 @@ class EditCardForm extends Component {
             <div><input onChange={this.handleChange} type="text" name="image" value={this.state.card.image}/></div>
             <div><input onChange={this.handleChange} type="text" name="description" value={this.state.card.description}/></div>
             <button>submit</button>
+            <button onClick={this.props.toggleEdit}>cancel</button>
         </form>
       </div>
     )

@@ -10,7 +10,9 @@ class SingleDeck extends Component {
       cards: [{}]
     },
     formToggle: false,
-    editToggle: false
+    editToggle: false,
+    deleteConfirm: false,
+    cardId: ""
   }
 
   componentDidMount() {
@@ -43,8 +45,13 @@ class SingleDeck extends Component {
     this.getDeck()
   }
 
-  toggleEdit = () => {
+  toggleEdit = cardId => {
+    this.setState({ cardId })
     this.setState({ editToggle: !this.state.editToggle })
+  }
+
+  deleteConfirm = () => {
+    this.setState({ deleteConfirm: !this.state.deleteConfirm })
   }
 
   render() {
@@ -64,7 +71,7 @@ class SingleDeck extends Component {
         <div>{this.state.deck.name}</div>
         {this.state.deck.cards.map((card, index) => (
           <div key={index}>
-            {this.state.editToggle ? (
+            {this.state.editToggle && this.state.cardId === card._id ? (
               <EditCardForm
                 history={this.props.history}
                 toggleEdit={this.toggleEdit}
@@ -84,12 +91,21 @@ class SingleDeck extends Component {
                 </Link>
                 <img src={card.image} alt={card.name} />
                 <div>{card.description}</div>
-                <button onClick={this.toggleEdit}>Edit card</button>
+                <button onClick={() => this.toggleEdit(card._id)}>
+                  Edit card
+                </button>
               </div>
             )}
-            <button onClick={() => this.deleteDeck(card._id)}>
-              delete card
-            </button>
+            <button onClick={this.deleteConfirm}>delete card</button>
+            {this.state.deleteConfirm ? (
+              <div>
+                <p>Are you sure you want to delete?</p>
+                <div>
+                  <button onClick={() => this.deleteDeck(card._id)}>Yes</button>
+                  <button onClick={this.deleteConfirm}>No</button>
+                </div>
+              </div>
+            ) : null}
           </div>
         ))}
       </div>

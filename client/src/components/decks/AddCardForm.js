@@ -43,7 +43,7 @@ class AddCardForm extends Component {
           <div>
             <input onChange={this.handleChange} type="text" placeholder="description" name="description" value={this.state.description}/>
           </div>
-          <button>Submit</button>
+          <button>Submit</button><button onClick={this.props.toggleForm}>Cancel</button>
         </form>
       </div>
     )
