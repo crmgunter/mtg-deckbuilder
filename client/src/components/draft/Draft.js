@@ -53,10 +53,6 @@ class Draft extends Component {
     })
   }
 
-  chooseCard = () => {
-      
-  }
-
   render() {
     return (
       <div>
@@ -76,7 +72,7 @@ class Draft extends Component {
             <button>Go</button>
           </div>
         </form>
-        {this.state.boosters? <Booster boosters={this.state.boosters} /> : null}
+        {this.state.boosters? <Booster chooseCard={this.chooseCard} boosters={this.state.boosters} /> : null}
       </div>
     )
   }

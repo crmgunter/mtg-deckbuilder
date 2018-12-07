@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 const CardFlex = styled.div`
@@ -8,6 +8,15 @@ const CardFlex = styled.div`
 `
 
 class Booster extends Component {
+    state = {
+        chosenCards: []
+    }
+
+    chooseCard = (card) => {
+        console.log('click', card)
+
+        this.setState({ chosenCards: card})
+      }
 
     render() {
         return (
@@ -15,8 +24,7 @@ class Booster extends Component {
                 {/* {console.log(this.props.boosters[0])} */}
                 {this.props.boosters.map((booster, i) => (
                     <div key={i}>
-                     {console.log(booster, 'hey')}
-                        <img src={booster.imageUrl} alt={booster.title}/>
+                        <img onClick={() => this.chooseCard(booster)} src={booster.imageUrl} alt={booster.title}/>
                     </div>
                 ))}
             </CardFlex>
