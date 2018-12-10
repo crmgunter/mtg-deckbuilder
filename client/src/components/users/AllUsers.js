@@ -25,7 +25,7 @@ class AllUsers extends Component {
     }
 
     render() {
-        const newUserForm = this.state.formDisplay ? <NewUserForm/> : <button onClick={this.revealNewUserForm}>Add User</button>
+        const newUserForm = this.state.formDisplay ? <NewUserForm getAllUsers={this.getAllUsers}/> : <button onClick={this.revealNewUserForm}>Add User</button>
         
         return (
             <div>
