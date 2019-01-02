@@ -16,8 +16,12 @@ class Booster extends Component {
         console.log('click', card)
         this.state.chosenCards.push(card)
         const newState = this.state.chosenCards
-        this.setState({chosenCards: newState})
-      }
+        this.setState({ chosenCards: newState })
+    }
+
+    filterNextBooster = () => {
+        this.props.getBooster()
+    }
 
     render() {
         return (
@@ -25,7 +29,10 @@ class Booster extends Component {
                 {/* {console.log(this.props.boosters[0])} */}
                 {this.props.boosters.map((booster, i) => (
                     <div key={i}>
-                        <img onClick={() => this.chooseCard(booster)} src={booster.imageUrl} alt={booster.title}/>
+                        <img onClick={() => {
+                            this.chooseCard(booster)
+                            this.filterNextBooster()
+                            }} src={booster.imageUrl} alt={booster.title} />
                     </div>
                 ))}
             </CardFlex>

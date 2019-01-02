@@ -72,7 +72,7 @@ class Draft extends Component {
             <button>Go</button>
           </div>
         </form>
-        {this.state.boosters? <Booster chooseCard={this.chooseCard} boosters={this.state.boosters} /> : null}
+        {this.state.boosters? <Booster getBooster={() => this.getBooster()} boosters={this.state.boosters} /> : null}
       </div>
     )
   }
