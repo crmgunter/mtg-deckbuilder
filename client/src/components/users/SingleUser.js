@@ -22,7 +22,7 @@ class SingleUser extends Component {
 
   render() {
     return (
-      <div>
+      <div key={this.state.user._id}>
         <h1>Single User</h1>
         <div>{this.state.user.username}</div>
         <img src={this.state.user.image} alt={this.state.user.username} />

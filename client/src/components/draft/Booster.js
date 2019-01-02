@@ -14,8 +14,9 @@ class Booster extends Component {
 
     chooseCard = (card) => {
         console.log('click', card)
-
-        this.setState({ chosenCards: card})
+        this.state.chosenCards.push(card)
+        const newState = this.state.chosenCards
+        this.setState({chosenCards: newState})
       }
 
     render() {
