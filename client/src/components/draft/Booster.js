@@ -20,8 +20,12 @@ class Booster extends Component {
         const cardIndex = this.props.boosters.indexOf(card)
         const storedBoosters = this.props.boosters
         storedBoosters.splice(cardIndex, 1)
-        console.log(storedBoosters)
-        this.setState({ chosenCards: chosenCard, storedBoosters: [storedBoosters]})
+        if (this.state.storedBoosters.length < 8) {
+            this.state.storedBoosters.push(storedBoosters)
+            const newState = this.state.storedBoosters
+            this.setState({ storedBoosters: newState })
+        }   
+        this.setState({ chosenCards: chosenCard })
         await this.filterNextBooster()
     }
 
@@ -37,7 +41,7 @@ class Booster extends Component {
                     <div key={i}>
                         <img onClick={() => {
                             this.chooseCard(booster)
-                            }} src={booster.imageUrl} alt={booster.title} />
+                        }} src={booster.imageUrl} alt={booster.title} />
                     </div>
                 ))}
             </CardFlex>
