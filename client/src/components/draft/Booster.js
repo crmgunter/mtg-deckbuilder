@@ -33,14 +33,12 @@ class Booster extends Component {
             console.log('stored packs')
             const chosenCard = this.state.chosenCards
             chosenCard.push(card)
-            const storedBoosters = this.state.storedBoosters
-            const cardIndex = storedBoosters[this.state.packCount - 1].indexOf(card)
+            const storedBoosters = await this.state.storedBoosters
+            const cardIndex = await storedBoosters[this.state.packCount].indexOf(card)
             console.log(cardIndex)
-            let updatedBooster = [ ...this.state.storedBoosters ]
-            console.log(updatedBooster[this.state.packCount - 1])
-            updatedBooster[this.state.packCount - 1].splice(cardIndex, 1)
-            console.log(updatedBooster)
-            this.setState({ storedBoosters: updatedBooster })
+            let updatedBooster = await [ ...this.state.storedBoosters ]
+            await updatedBooster[0 + this.state.packCount].splice(cardIndex, 1)
+            await this.setState({ storedBoosters: updatedBooster })
         }
     }
 
